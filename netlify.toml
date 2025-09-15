@@ -21,5 +21,5 @@
   NETLIFY_IDENTITY_URL = "/.netlify/identity"
 
 # Git LFS for large media files
-[[plugins]]
-  package = "netlify-plugin-git-lfs"
+#[[plugins]]
+#package = "netlify-plugin-git-lfs"
