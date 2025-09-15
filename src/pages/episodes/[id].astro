@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EpisodePlayer from '../../components/EpisodePlayer.astro';
+
+// Get the episode ID from the URL
+const { id } = Astro.params;
+
+// In a real app, you would fetch this data from your CMS
+// This is just sample data that matches our episodes list
+const episode = {
+  id: id,
+  title: 'WrestleMania Recap & Analysis',
+  description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
+  longDescription: `In this action-packed episode, we dive deep into all the matches, moments, and surprises from WrestleMania. From the opening match to the main event, we leave no stone unturned in our analysis.
+
+We discuss the shocking returns, the title changes, and the matches that stole the show. Plus, we share our thoughts on what these developments mean for the future of WWE programming in the coming months.
+
+Join us as we break down the in-ring action, the storytelling, and the production value of the biggest show of the year. Whether you loved it or had some criticisms, this episode has something for every wrestling fan.`,
+  date: '2023-04-10',
+  duration: '1:25:36',
+  youtubeId: 'dQw4w9WgXcQ',
+  audiomackUrl: 'https://audiomack.com/wecominforyoucast/episode/wrestlemania-recap-analysis',
+  image: '/placeholder-episode-1.jpg',
+  tags: ['wwe', 'wrestlemania', 'ppv'],
+  hostNotes: [
+    '00:01:30 - Opening segment thoughts',
+    '00:15:45 - First match analysis',
+    '00:35:20 - Surprise return discussion',
+    '00:50:10 - Main event breakdown'
+  ]
+};
+
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
+
+// Set the page title and description for SEO
+const title = `${episode.title} | We Comin' For You Cast`;
+const description = episode.description;
+
+// In a real app, you would handle 404 if episode is not found
+---
+
+<Layout title={episode.title}>
+  <article class="max-w-4xl mx-auto">
+    <!-- Episode Header -->
+    <header class="mb-12">
+      <div class="mb-6">
+        <a href="/episodes" class="text-red-700 hover:text-red-800 font-medium inline-flex items-center">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+          </svg>
+          Back to Episodes
+        </a>
+      </div>
+      
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/3">
+          <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+            <img 
+              src={episode.image} 
+              alt={episode.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        
+        <div class="md:w-2/3">
+          <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)} • {episode.duration}</div>
+          <h1 class="text-3xl md:text-4xl font-bold font-serif mb-4">{episode.title}</h1>
+          
+          <div class="flex flex-wrap gap-2 mb-6">
+            {episode.tags.map(tag => (
+              <span class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <p class="text-lg text-gray-700 mb-6">{episode.description}</p>
+          
+          <div class="flex space-x-4">
+            {episode.youtubeId && (
+              <a 
+                href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors"
+              >
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                </svg>
+                Watch on YouTube
+              </a>
+            )}
+            {episode.audiomackUrl && (
+              <a 
+                href={episode.audiomackUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors"
+              >
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5z"/>
+                  <path d="M12 5.5l-8 12h16l-8-12z"/>
+                </svg>
+                Listen on Audiomack
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Episode Content -->
+      <div class="lg:col-span-2">
+        <!-- Episode Player -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+          <EpisodePlayer 
+            youtubeId={episode.youtubeId}
+            audiomackUrl={episode.audiomackUrl}
+            title={episode.title}
+          />
+        </div>
+
+        <!-- Episode Description -->
+        <div class="prose max-w-none">
+          <h2 class="text-2xl font-bold font-serif mb-6">Episode Details</h2>
+          <div class="whitespace-pre-line">{episode.longDescription}</div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        {/* Host Notes */}
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+          <h3 class="text-xl font-bold font-serif mb-4">Host Notes</h3>
+          <ul class="space-y-3">
+            {episode.hostNotes.map((note, index) => (
+              <li class="flex items-start">
+                <span class="text-red-700 font-mono mr-2">[{note.split(' - ')[0]}]</span>
+                <span>{note.split(' - ')[1]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Share Buttons */}
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <h3 class="text-xl font-bold font-serif mb-4">Share This Episode</h3>
+          <div class="flex space-x-3">
+            <a 
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out "${episode.title}" on We Comin' For You Cast!`)}&url=${encodeURIComponent(Astro.url.href)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center hover:bg-blue-600 transition-colors"
+              title="Share on Twitter"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+              </svg>
+            </a>
+            <a 
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-blue-700 text-white flex items-center justify-center hover:bg-blue-800 transition-colors"
+              title="Share on Facebook"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+              </svg>
+            </a>
+            <a 
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(episode.title)}&summary=${encodeURIComponent(episode.description)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors"
+              title="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Related Episodes */}
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold font-serif mb-8">More Episodes You Might Like</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3].map(i => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="h-40 bg-gray-200">
+              <img 
+                src={`/placeholder-episode-${i}.jpg`} 
+                alt={`Related episode ${i}`}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-lg font-serif mb-1">
+                <a href={`/episodes/${i}`} class="hover:text-red-700 transition-colors">
+                  {i === 1 ? 'WrestleMania Recap & Analysis' : 
+                   i === 2 ? 'AEW Revolution Review' : 'NXT 2.0: Love It or Hate It?'}
+                </a>
+              </h3>
+              <p class="text-sm text-gray-500 mb-2">April 10, 2023 • 1:25:36</p>
+              <p class="text-sm text-gray-700 line-clamp-2">
+                {i === 1 ? 'We break down all the biggest moments from this year\'s WrestleMania!' :
+                 i === 2 ? 'Our thoughts on the latest AEW PPV and what it means for the future.' :
+                 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.'}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </article>
+</Layout>

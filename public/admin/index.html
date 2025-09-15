@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We Comin' For You Cast - Content Manager</title>
+    <!-- Include the script that enables Netlify Identity on this page. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Include the script that makes Netlify CMS work. -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <style>
+      /* Add some basic styling */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .header {
+        background-color: #b91c1c;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      .content {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>We Comin' For You Cast - Content Manager</h1>
+    </div>
+    <div class="content">
+      <!-- Include the script that builds the CMS. -->
+      <script>
+        // Initialize the CMS object
+        CMS.init({
+          config: {
+            backend: {
+              name: 'git-gateway',
+              branch: 'main',
+            },
+            load_config_file: false,
+            media_folder: 'public/uploads',
+            public_folder: '/uploads',
+            collections: [
+              {
+                name: 'episodes',
+                label: 'Episodes',
+                folder: 'src/content/episodes',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { 
+                    label: 'Publish Date', 
+                    name: 'date', 
+                    widget: 'datetime',
+                    date_format: 'YYYY-MM-DD',
+                    time_format: false,
+                    format: 'YYYY-MM-DD',
+                  },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Long Description', name: 'longDescription', widget: 'markdown' },
+                  { label: 'Duration', name: 'duration', widget: 'string' },
+                  { label: 'YouTube Video ID', name: 'youtubeId', widget: 'string', required: false },
+                  { label: 'Audiomack URL', name: 'audiomackUrl', widget: 'string', required: false },
+                  { 
+                    label: 'Cover Image', 
+                    name: 'image', 
+                    widget: 'image', 
+                    required: false,
+                    media_library: {
+                      allow_multiple: false,
+                    },
+                  },
+                  {
+                    label: 'Tags',
+                    name: 'tags',
+                    widget: 'list',
+                    required: false,
+                    field: { label: 'Tag', name: 'tag', widget: 'string' },
+                  },
+                  {
+                    label: 'Host Notes',
+                    name: 'hostNotes',
+                    widget: 'list',
+                    required: false,
+                    field: { label: 'Note', name: 'note', widget: 'string' },
+                  },
+                  { 
+                    label: 'Draft', 
+                    name: 'draft', 
+                    widget: 'boolean', 
+                    default: false, 
+                    required: false 
+                  },
+                ],
+              },
+            ],
+          },
+        });
+      </script>
+    </div>
+  </body>
+</html>

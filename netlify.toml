@@ -1,0 +1,25 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+# Enable Netlify Identity for CMS authentication
+[context.production.environment]
+  NETLIFY_IDENTITY_URL = "/.netlify/identity"
+
+# Git LFS for large media files
+[[plugins]]
+  package = "netlify-plugin-git-lfs"

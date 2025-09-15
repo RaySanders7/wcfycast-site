@@ -1,0 +1,57 @@
+---
+interface Props {
+  youtubeId?: string;
+  audiomackUrl?: string;
+  title: string;
+}
+
+const { youtubeId, audiomackUrl, title } = Astro.props;
+---
+
+<div class="space-y-6">
+  {youtubeId && (
+    <div>
+      <h3 class="text-xl font-bold font-serif mb-4">Watch on YouTube</h3>
+      <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+        <iframe 
+          src={`https://www.youtube.com/embed/${youtubeId}`}
+          title={`${title} on YouTube`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="w-full h-full"
+        ></iframe>
+      </div>
+    </div>
+  )}
+
+  {audiomackUrl && (
+    <div>
+      <h3 class="text-xl font-bold font-serif mb-4">Listen on Audiomack</h3>
+      <div class="bg-gray-200 rounded-lg overflow-hidden">
+        <iframe 
+          src={audiomackUrl.replace('audiomack.com/', 'audiomack.com/embed/')}
+          title={`${title} on Audiomack`}
+          scrolling="no"
+          class="w-full h-200"
+        ></iframe>
+      </div>
+    </div>
+  )}
+
+  {!youtubeId && !audiomackUrl && (
+    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-yellow-700">
+            No media available for this episode.
+          </p>
+        </div>
+      </div>
+    </div>
+  )}
+</div>

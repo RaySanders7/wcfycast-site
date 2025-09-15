@@ -1,11 +1,165 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Sample episode data - this will later be replaced with data from Decap CMS
+const featuredEpisodes = [
+  {
+    id: 1,
+    title: 'WrestleMania Recap & Analysis',
+    description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
+    date: '2023-04-10',
+    duration: '1:25:36',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-1.jpg'
+  },
+  {
+    id: 2,
+    title: 'AEW Revolution Review',
+    description: 'Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company.',
+    date: '2023-03-15',
+    duration: '1:12:45',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-2.jpg'
+  },
+  {
+    id: 3,
+    title: 'NXT 2.0: Love It or Hate It?',
+    description: 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.',
+    date: '2023-03-01',
+    duration: '58:22',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-3.jpg'
+  }
+];
+
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="relative bg-red-700 text-white py-20 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold font-serif mb-6">We Comin' For You Cast</h1>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">Your go-to podcast for the latest pro-wrestling news, analysis, and hot takes!</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/episodes" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full transition-colors">
+          Listen to Episodes
+        </a>
+        <a href="#featured" class="bg-transparent hover:bg-white/10 text-white font-bold py-3 px-8 border-2 border-white rounded-full transition-colors">
+          Latest Episodes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Episodes -->
+  <section id="featured" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif mb-4">Latest Episodes</h2>
+        <div class="w-20 h-1 bg-red-700 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredEpisodes.map(episode => (
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105">
+            <div class="relative pb-[56.25%] bg-gray-200">
+              <img 
+                src={episode.image} 
+                alt={episode.title}
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 p-4 w-full">
+                <span class="inline-block bg-red-700 text-white text-xs px-2 py-1 rounded">
+                  {episode.duration}
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)}</div>
+              <h3 class="text-xl font-bold mb-2 font-serif">
+                <a href={`/episodes/${episode.id}`} class="hover:text-red-700 transition-colors">
+                  {episode.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">{episode.description}</p>
+              <div class="flex space-x-3">
+                <a 
+                  href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-red-700 hover:text-red-800 flex items-center"
+                  title="Watch on YouTube"
+                >
+                  <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                  </svg>
+                  Watch
+                </a>
+                <a 
+                  href={episode.audiomackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-red-700 hover:text-red-800 flex items-center"
+                  title="Listen on Audiomack"
+                >
+                  <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5z"/>
+                    <path d="M12 5.5l-8 12h16l-8-12z"/>
+                  </svg>
+                  Listen
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a 
+          href="/episodes" 
+          class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-full transition-colors"
+        >
+          View All Episodes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold font-serif mb-4">About The Show</h2>
+          <div class="w-20 h-1 bg-red-700 mx-auto"></div>
+        </div>
+        
+        <div class="prose mx-auto">
+          <p>Welcome to <strong>We Comin' For You Cast</strong>, the ultimate pro-wrestling podcast where we break down the latest matches, storylines, and backstage news from WWE, AEW, NJPW, and beyond.</p>
+          
+          <p>Each week, our passionate hosts bring you in-depth analysis, hot takes, and exclusive interviews with some of the biggest names in the wrestling business. Whether you're a lifelong fan or new to the squared circle, we've got something for everyone.</p>
+          
+          <p>New episodes drop every Monday. Subscribe on your favorite podcast platform and never miss an episode!</p>
+          
+          <div class="mt-8 text-center">
+            <a 
+              href="/about" 
+              class="inline-block bg-transparent hover:bg-red-700 text-red-700 hover:text-white font-bold py-3 px-8 border-2 border-red-700 rounded-full transition-colors"
+            >
+              Learn More About Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

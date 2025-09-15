@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Sample data - will be replaced with data from Decap CMS
+const allEpisodes = [
+  {
+    id: 1,
+    title: 'WrestleMania Recap & Analysis',
+    description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
+    date: '2023-04-10',
+    duration: '1:25:36',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-1.jpg',
+    tags: ['wwe', 'wrestlemania', 'ppv']
+  },
+  {
+    id: 2,
+    title: 'AEW Revolution Review',
+    description: 'Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company.',
+    date: '2023-03-15',
+    duration: '1:12:45',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-2.jpg',
+    tags: ['aew', 'ppv', 'revolution']
+  },
+  {
+    id: 3,
+    title: 'NXT 2.0: Love It or Hate It?',
+    description: 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.',
+    date: '2023-03-01',
+    duration: '58:22',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-3.jpg',
+    tags: ['wwe', 'nxt', 'discussion']
+  },
+  {
+    id: 4,
+    title: 'Royal Rumble Fallout',
+    description: 'Breaking down all the surprises and what the Royal Rumble results mean for WrestleMania season.',
+    date: '2023-01-30',
+    duration: '1:05:12',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-4.jpg',
+    tags: ['wwe', 'royal-rumble', 'ppv']
+  },
+  {
+    id: 5,
+    title: 'AEW Winter is Coming Review',
+    description: 'Our take on the latest AEW special, including the shocking title change and what it means for the future of the company.',
+    date: '2022-12-15',
+    duration: '52:18',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-5.jpg',
+    tags: ['aew', 'winter-is-coming', 'ppv']
+  },
+  {
+    id: 6,
+    title: 'NXT WarGames Preview',
+    description: 'Our predictions and analysis for the upcoming NXT WarGames event, including potential surprises and match breakdowns.',
+    date: '2022-11-28',
+    duration: '47:35',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: '#',
+    image: '/placeholder-episode-6.jpg',
+    tags: ['wwe', 'nxt', 'wargames', 'preview']
+  },
+];
+
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
+---
+
+<Layout title="Episodes">
+  <!-- Hero Section -->
+  <section class="relative bg-red-700 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold font-serif mb-4">All Episodes</h1>
+      <p class="text-xl max-w-2xl mx-auto">Catch up on all episodes of We Comin' For You Cast</p>
+    </div>
+  </section>
+
+  <!-- Episodes Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {allEpisodes.map(episode => (
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+            <div class="relative pb-[56.25%] bg-gray-200">
+              <img 
+                src={episode.image} 
+                alt={episode.title}
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 p-4 w-full">
+                <span class="inline-block bg-red-700 text-white text-xs px-2 py-1 rounded">
+                  {episode.duration}
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)}</div>
+              <h3 class="text-xl font-bold mb-2 font-serif">
+                <a href={`/episodes/${episode.id}`} class="hover:text-red-700 transition-colors">
+                  {episode.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">{episode.description}</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {episode.tags.map(tag => (
+                  <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div class="flex space-x-3">
+                <a 
+                  href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-red-700 hover:text-red-800 flex items-center text-sm"
+                  title="Watch on YouTube"
+                >
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                  </svg>
+                  Watch
+                </a>
+                <a 
+                  href={episode.audiomackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-red-700 hover:text-red-800 flex items-center text-sm"
+                  title="Listen on Audiomack"
+                >
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5z"/>
+                    <path d="M12 5.5l-8 12h16l-8-12z"/>
+                  </svg>
+                  Listen
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div class="flex justify-center mt-12">
+        <nav class="flex items-center space-x-1">
+          <button class="px-4 py-2 border border-gray-300 rounded-l-md bg-white text-gray-700 hover:bg-gray-50">
+            Previous
+          </button>
+          <button class="px-4 py-2 border-t border-b border-gray-300 bg-red-700 text-white">
+            1
+          </button>
+          <button class="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+            2
+          </button>
+          <button class="px-4 py-2 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+            3
+          </button>
+          <button class="px-4 py-2 border border-gray-300 rounded-r-md bg-white text-gray-700 hover:bg-gray-50">
+            Next
+          </button>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-red-700 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold font-serif mb-6">Never Miss an Episode</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">Subscribe to our newsletter to get notified when new episodes are released.</p>
+      <form class="max-w-md mx-auto flex">
+        <input 
+          type="email" 
+          placeholder="Enter your email" 
+          class="flex-1 px-4 py-3 rounded-l-md focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-900"
+          required
+        />
+        <button 
+          type="submit" 
+          class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-r-md transition-colors"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>
