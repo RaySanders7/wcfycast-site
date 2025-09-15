@@ -8,11 +8,11 @@ interface Props {
 const { youtubeId, audiomackUrl, title } = Astro.props;
 ---
 
-<div class="space-y-4 sm:space-y-6">
+<div class="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
   {youtubeId && (
     <div>
       <h3 class="text-lg sm:text-xl font-bold font-serif mb-3 sm:mb-4">Watch on YouTube</h3>
-      <div class="relative w-full" style="padding-bottom: 56.25%;">
+      <div class="relative w-full max-w-3xl mx-auto" style="padding-bottom: 56.25%;">
         <iframe 
           src={`https://www.youtube.com/embed/${youtubeId}`}
           title={`${title} on YouTube`}
@@ -27,7 +27,7 @@ const { youtubeId, audiomackUrl, title } = Astro.props;
   {audiomackUrl && (
     <div>
       <h3 class="text-lg sm:text-xl font-bold font-serif mb-3 sm:mb-4">Listen on Audiomack</h3>
-      <div class="bg-gray-200 rounded-lg overflow-hidden">
+      <div class="bg-gray-200 rounded-lg overflow-hidden max-w-2xl mx-auto">
         <iframe 
           src={audiomackUrl.replace('audiomack.com/', 'audiomack.com/embed/')}
           title={`${title} on Audiomack`}
