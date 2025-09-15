@@ -19,16 +19,16 @@ const { title, description = 'We Comin\' For You Cast - Your favorite pro-wrestl
   </head>
   <body class="min-h-screen bg-gray-50">
     <header class="bg-red-700 text-white shadow-lg">
-      <div class="container mx-auto px-4 py-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="flex items-center space-x-3">
-            <h1 class="text-3xl font-bold font-serif">We Comin' For You Cast</h1>
+      <div class="container mx-auto px-4 py-4 md:py-6">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <div class="flex items-center space-x-3 mb-3 sm:mb-0">
+            <h1 class="text-2xl sm:text-3xl font-bold font-serif text-center sm:text-left">We Comin' For You Cast</h1>
           </div>
-          <nav class="mt-4 md:mt-0">
-            <ul class="flex space-x-6">
-              <li><a href="/" class="hover:text-yellow-300 transition-colors">Home</a></li>
-              <li><a href="/episodes" class="hover:text-yellow-300 transition-colors">Episodes</a></li>
-              <li><a href="/about" class="hover:text-yellow-300 transition-colors">About</a></li>
+          <nav class="w-full sm:w-auto">
+            <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+              <li><a href="/" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">Home</a></li>
+              <li><a href="/episodes" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">Episodes</a></li>
+              <li><a href="/about" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">About</a></li>
             </ul>
           </nav>
         </div>
@@ -113,5 +113,49 @@ const { title, description = 'We Comin\' For You Cast - Your favorite pro-wrestl
   
   .prose a:hover {
     text-decoration: underline;
+  }
+  
+  /* Additional responsive utilities */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Better touch targets for mobile */
+  @media (max-width: 640px) {
+    a, button {
+      min-height: 44px;
+      min-width: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  /* Improved text scaling */
+  @media (max-width: 480px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 768px) {
+    html {
+      font-size: 15px;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    html {
+      font-size: 16px;
+    }
   }
 </style>

@@ -79,17 +79,17 @@ const formatDate = (dateString: string) => {
 
 <Layout title="Episodes">
   <!-- Hero Section -->
-  <section class="relative bg-red-700 text-white py-20">
+  <section class="relative bg-red-700 text-white py-12 sm:py-16 md:py-20">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold font-serif mb-4">All Episodes</h1>
-      <p class="text-xl max-w-2xl mx-auto">Catch up on all episodes of We Comin' For You Cast</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif mb-4 leading-tight">All Episodes</h1>
+      <p class="text-lg sm:text-xl max-w-2xl mx-auto px-4">Catch up on all episodes of We Comin' For You Cast</p>
     </div>
   </section>
 
   <!-- Episodes Grid -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-12 sm:py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {allEpisodes.map(episode => (
           <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
             <div class="relative pb-[56.25%] bg-gray-200">

@@ -43,16 +43,16 @@ const formatDate = (dateString: string) => {
 
 <Layout title="Home">
   <!-- Hero Section -->
-  <section class="relative bg-red-700 text-white py-20 md:py-32 overflow-hidden">
+  <section class="relative bg-red-700 text-white py-12 sm:py-20 md:py-32 overflow-hidden">
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <div class="container mx-auto px-4 relative z-10 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold font-serif mb-6">We Comin' For You Cast</h1>
-      <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8">Your go-to podcast for the latest pro-wrestling news, analysis, and hot takes!</p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="/episodes" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full transition-colors">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif mb-4 sm:mb-6 leading-tight">We Comin' For You Cast</h1>
+      <p class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-6 sm:mb-8 px-4">Your go-to podcast for the latest pro-wrestling news, analysis, and hot takes!</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
+        <a href="/episodes" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-3 px-6 sm:px-8 rounded-full transition-colors text-center">
           Listen to Episodes
         </a>
-        <a href="#featured" class="bg-transparent hover:bg-white/10 text-white font-bold py-3 px-8 border-2 border-white rounded-full transition-colors">
+        <a href="#featured" class="bg-transparent hover:bg-white/10 text-white font-bold py-3 px-6 sm:px-8 border-2 border-white rounded-full transition-colors text-center">
           Latest Episodes
         </a>
       </div>
@@ -67,9 +67,9 @@ const formatDate = (dateString: string) => {
         <div class="w-20 h-1 bg-red-700 mx-auto"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {featuredEpisodes.map(episode => (
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105">
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105 mx-auto w-full max-w-sm sm:max-w-none">
             <div class="relative pb-[56.25%] bg-gray-200">
               <img 
                 src={episode.image} 
@@ -77,29 +77,29 @@ const formatDate = (dateString: string) => {
                 class="absolute inset-0 w-full h-full object-cover"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <div class="absolute bottom-0 left-0 p-4 w-full">
+              <div class="absolute bottom-0 left-0 p-3 sm:p-4 w-full">
                 <span class="inline-block bg-red-700 text-white text-xs px-2 py-1 rounded">
                   {episode.duration}
                 </span>
               </div>
             </div>
-            <div class="p-6">
+            <div class="p-4 sm:p-6">
               <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)}</div>
-              <h3 class="text-xl font-bold mb-2 font-serif">
+              <h3 class="text-lg sm:text-xl font-bold mb-2 font-serif leading-tight">
                 <a href={`/episodes/${episode.id}`} class="hover:text-red-700 transition-colors">
                   {episode.title}
                 </a>
               </h3>
-              <p class="text-gray-600 mb-4">{episode.description}</p>
-              <div class="flex space-x-3">
+              <p class="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3">{episode.description}</p>
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <a 
                   href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-red-700 hover:text-red-800 flex items-center"
+                  class="text-red-700 hover:text-red-800 flex items-center justify-center sm:justify-start py-2 sm:py-0"
                   title="Watch on YouTube"
                 >
-                  <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                   </svg>
                   Watch
@@ -108,10 +108,10 @@ const formatDate = (dateString: string) => {
                   href={episode.audiomackUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-red-700 hover:text-red-800 flex items-center"
+                  class="text-red-700 hover:text-red-800 flex items-center justify-center sm:justify-start py-2 sm:py-0"
                   title="Listen on Audiomack"
                 >
-                  <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5z"/>
                     <path d="M12 5.5l-8 12h16l-8-12z"/>
                   </svg>
