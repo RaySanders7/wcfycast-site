@@ -3,26 +3,19 @@ import Layout from '../layouts/Layout.astro';
 
 const teamMembers = [
   {
-    name: 'Alex Johnson',
-    role: 'Host & Lead Analyst',
+    name: 'RVS',
+    role: 'Co-Host',
     bio: 'With over 10 years of experience in professional wrestling analysis, Alex brings deep insights into the world of sports entertainment. His encyclopedic knowledge of wrestling history makes him the perfect guide through the ever-evolving landscape of the industry.',
     image: '/placeholder-team-1.jpg',
     twitter: '#'
   },
   {
-    name: 'Jamie Smith',
-    role: 'Co-Host & Storyline Expert',
+    name: 'R8TED R',
+    role: 'Co-Host',
     bio: 'Jamie\'s background in creative writing and love for long-term storytelling in wrestling brings a unique perspective to the show. Known for predicting major angles before they happen, Jamie keeps listeners one step ahead of the curve.',
     image: '/placeholder-team-2.jpg',
     twitter: '#'
   },
-  {
-    name: 'Taylor Davis',
-    role: 'Producer & Stats Guru',
-    bio: 'The numbers don\'t lie, and neither does Taylor. With a mind for statistics and a passion for the technical side of wrestling, Taylor provides the hard data behind the show\'s analysis and predictions.',
-    image: '/placeholder-team-3.jpg',
-    twitter: '#'
-  }
 ];
 
 const stats = [
@@ -34,12 +27,13 @@ const stats = [
 ---
 
 <Layout title="About Us">
-  <!-- Hero Section -->
-  <section class="relative bg-red-700 text-white py-12 sm:py-16 md:py-20">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div class="container mx-auto px-4 relative z-10 text-center">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif mb-4 sm:mb-6 leading-tight px-4">About We Comin' For You Cast</h1>
-      <p class="text-lg sm:text-xl max-w-3xl mx-auto px-4">Your ultimate destination for pro-wrestling analysis, news, and entertainment</p>
+  <!-- Page Header -->
+  <section class="py-8 bg-white border-b border-gray-200">
+    <div class="container mx-auto px-4">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-4xl font-bold font-serif mb-4 text-gray-900">About We Comin' For You Cast</h1>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Pro Wresting From a Black Dude's Perspective</p>
+      </div>
     </div>
   </section>
 

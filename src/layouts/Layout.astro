@@ -18,19 +18,65 @@ const { title, description = 'We Comin\' For You Cast - Your favorite pro-wrestl
     <title>{title} | We Comin' For You Cast</title>
   </head>
   <body class="min-h-screen bg-gray-50">
-    <header class="bg-red-700 text-white shadow-lg">
-      <div class="container mx-auto px-4 py-4 md:py-6">
-        <div class="flex flex-col sm:flex-row justify-between items-center">
-          <div class="flex items-center space-x-3 mb-3 sm:mb-0">
-            <h1 class="text-2xl sm:text-3xl font-bold font-serif text-center sm:text-left">We Comin' For You Cast</h1>
-          </div>
-          <nav class="w-full sm:w-auto">
-            <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
-              <li><a href="/" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">Home</a></li>
-              <li><a href="/episodes" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">Episodes</a></li>
-              <li><a href="/about" class="block py-2 px-4 sm:py-0 sm:px-0 hover:text-yellow-300 transition-colors rounded sm:rounded-none hover:bg-red-800 sm:hover:bg-transparent">About</a></li>
+    <header class="bg-gradient-to-r from-red-800 via-red-700 to-red-600 text-white shadow-xl">
+      <!-- Navigation Bar -->
+      <nav class="border-b border-red-600/30">
+        <div class="container mx-auto px-4 py-3">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                <span class="text-red-800 font-bold text-sm">WC</span>
+              </div>
+              <span class="font-medium text-sm sm:text-base">We Comin' For You Cast</span>
+            </div>
+            <ul class="flex space-x-4 sm:space-x-6">
+              <li><a href="/" class="text-sm sm:text-base hover:text-yellow-300 transition-colors py-2 px-3 rounded hover:bg-red-600/50">Home</a></li>
+              <li><a href="/episodes" class="text-sm sm:text-base hover:text-yellow-300 transition-colors py-2 px-3 rounded hover:bg-red-600/50">Episodes</a></li>
+              <li><a href="/about" class="text-sm sm:text-base hover:text-yellow-300 transition-colors py-2 px-3 rounded hover:bg-red-600/50">About</a></li>
             </ul>
-          </nav>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <div class="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10 text-center">
+          <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif mb-4 sm:mb-6 leading-tight">
+              <span class="block text-yellow-400">We Comin'</span>
+              <span class="block">For You Cast</span>
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-red-100 max-w-3xl mx-auto leading-relaxed">
+              Your ultimate destination for pro-wrestling analysis, hot takes, and behind-the-scenes insights
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div class="flex items-center space-x-2 text-yellow-300">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM15.657 6.343a1 1 0 011.414 0A9.972 9.972 0 0119 12a9.972 9.972 0 01-1.929 5.657 1 1 0 11-1.414-1.414A7.971 7.971 0 0017 12a7.971 7.971 0 00-1.343-4.243 1 1 0 010-1.414z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd" d="M13.828 8.172a1 1 0 011.414 0A5.983 5.983 0 0117 12a5.983 5.983 0 01-1.758 3.828 1 1 0 11-1.414-1.414A3.987 3.987 0 0015 12a3.987 3.987 0 00-1.172-2.828 1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm sm:text-base font-medium">New episodes every Monday</span>
+              </div>
+              <div class="flex space-x-3">
+                <a href="#" class="text-white hover:text-yellow-300 transition-colors" title="YouTube">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-300 transition-colors" title="Audiomack">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 22.5c-5.8 0-10.5-4.7-10.5-10.5S6.2 1.5 12 1.5 22.5 6.2 22.5 12 17.8 22.5 12 22.5z"/>
+                    <path d="M12 5.5l-8 12h16l-8-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
