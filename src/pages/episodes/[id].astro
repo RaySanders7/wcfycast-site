@@ -2,44 +2,90 @@
 import Layout from '../../layouts/Layout.astro';
 import EpisodePlayer from '../../components/EpisodePlayer.astro';
 
-// Get the episode ID from the URL
-const { id } = Astro.params;
-
-// In a real app, you would fetch this data from your CMS
-// This is just sample data that matches our episodes list
-const episode = {
-  id: id,
-  title: 'WrestleMania Recap & Analysis',
-  description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
-  longDescription: `In this action-packed episode, we dive deep into all the matches, moments, and surprises from WrestleMania. From the opening match to the main event, we leave no stone unturned in our analysis.
+// Sample episodes data - in production this would come from your CMS
+const allEpisodes = [
+  {
+    id: '1',
+    title: 'WrestleMania Recap & Analysis',
+    description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
+    longDescription: `In this action-packed episode, we dive deep into all the matches, moments, and surprises from WrestleMania. From the opening match to the main event, we leave no stone unturned in our analysis.
 
 We discuss the shocking returns, the title changes, and the matches that stole the show. Plus, we share our thoughts on what these developments mean for the future of WWE programming in the coming months.
 
 Join us as we break down the in-ring action, the storytelling, and the production value of the biggest show of the year. Whether you loved it or had some criticisms, this episode has something for every wrestling fan.`,
-  date: '2023-04-10',
-  duration: '1:25:36',
-  youtubeId: 'dQw4w9WgXcQ',
-  audiomackUrl: 'https://audiomack.com/wecominforyoucast/episode/wrestlemania-recap-analysis',
-  image: '/placeholder-episode-1.jpg',
-  tags: ['wwe', 'wrestlemania', 'ppv'],
-  hostNotes: [
-    '00:01:30 - Opening segment thoughts',
-    '00:15:45 - First match analysis',
-    '00:35:20 - Surprise return discussion',
-    '00:50:10 - Main event breakdown'
-  ]
-};
+    date: '2023-04-10',
+    duration: '1:25:36',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: 'https://audiomack.com/wecominforyoucast/episode/wrestlemania-recap-analysis',
+    image: '/placeholder-episode-1.jpg',
+    tags: ['wwe', 'wrestlemania', 'ppv'],
+    hostNotes: [
+      '00:01:30 - Opening segment thoughts',
+      '00:15:45 - First match analysis',
+      '00:35:20 - Surprise return discussion',
+      '00:50:10 - Main event breakdown'
+    ]
+  },
+  {
+    id: '2',
+    title: 'AEW Revolution Review',
+    description: 'Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company.',
+    longDescription: `AEW Revolution delivered another solid pay-per-view with several standout matches and moments that will be talked about for weeks to come.
+
+We break down each match, discuss the booking decisions, and analyze what the results mean for AEW's future storylines. From the opening contest to that shocking main event finish, we cover it all.
+
+Plus, we share our thoughts on AEW's presentation, production values, and how they continue to differentiate themselves in the wrestling landscape.`,
+    date: '2023-03-15',
+    duration: '1:12:45',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: 'https://audiomack.com/wecominforyoucast/episode/aew-revolution-review',
+    image: '/placeholder-episode-2.jpg',
+    tags: ['aew', 'ppv', 'revolution'],
+    hostNotes: [
+      '00:02:15 - Opening match discussion',
+      '00:18:30 - Mid-card analysis',
+      '00:45:20 - Main event breakdown',
+      '01:05:10 - Future storyline predictions'
+    ]
+  },
+  {
+    id: '3',
+    title: 'NXT 2.0: Love It or Hate It?',
+    description: 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.',
+    longDescription: `The NXT rebrand has been one of the most controversial topics in wrestling. In this episode, we dive deep into what's working, what isn't, and where the brand might be headed.
+
+We discuss the new talent, the presentation changes, and how the shift in focus has affected both the wrestlers and the audience. Is NXT 2.0 the future or a step backward?
+
+Join us for a balanced discussion that covers all angles of this major WWE decision.`,
+    date: '2023-03-01',
+    duration: '58:22',
+    youtubeId: 'dQw4w9WgXcQ',
+    audiomackUrl: 'https://audiomack.com/wecominforyoucast/episode/nxt-2-love-it-or-hate-it',
+    image: '/placeholder-episode-3.jpg',
+    tags: ['wwe', 'nxt', 'discussion'],
+    hostNotes: [
+      '00:01:45 - NXT 2.0 overview',
+      '00:12:30 - New talent discussion',
+      '00:28:15 - Production changes',
+      '00:45:00 - Future predictions'
+    ]
+  }
+];
+
+export async function getStaticPaths() {
+  return allEpisodes.map((episode) => ({
+    params: { id: episode.id },
+    props: { episode }
+  }));
+}
+
+// Get the episode data from props
+const { episode } = Astro.props;
 
 const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString('en-US', options);
 };
-
-// Set the page title and description for SEO
-const title = `${episode.title} | We Comin' For You Cast`;
-const description = episode.description;
-
-// In a real app, you would handle 404 if episode is not found
 ---
 
 <Layout title={episode.title}>
