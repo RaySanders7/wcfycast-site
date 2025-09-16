@@ -1,75 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Sample data - will be replaced with data from Decap CMS
-const allEpisodes = [
-  {
-    id: 1,
-    title: 'WrestleMania Recap & Analysis',
-    description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
-    date: '2023-04-10',
-    duration: '1:25:36',
-    youtubeId: '5pL_TXiMQSQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-1.jpg',
-    tags: ['wwe', 'wrestlemania', 'ppv']
-  },
-  {
-    id: 2,
-    title: 'AEW Revolution Review',
-    description: 'Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company.',
-    date: '2023-03-15',
-    duration: '1:12:45',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-2.jpg',
-    tags: ['aew', 'ppv', 'revolution']
-  },
-  {
-    id: 3,
-    title: 'NXT 2.0: Love It or Hate It?',
-    description: 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.',
-    date: '2023-03-01',
-    duration: '58:22',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-3.jpg',
-    tags: ['wwe', 'nxt', 'discussion']
-  },
-  {
-    id: 4,
-    title: 'Royal Rumble Fallout',
-    description: 'Breaking down all the surprises and what the Royal Rumble results mean for WrestleMania season.',
-    date: '2023-01-30',
-    duration: '1:05:12',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-4.jpg',
-    tags: ['wwe', 'royal-rumble', 'ppv']
-  },
-  {
-    id: 5,
-    title: 'AEW Winter is Coming Review',
-    description: 'Our take on the latest AEW special, including the shocking title change and what it means for the future of the company.',
-    date: '2022-12-15',
-    duration: '52:18',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-5.jpg',
-    tags: ['aew', 'winter-is-coming', 'ppv']
-  },
-  {
-    id: 6,
-    title: 'NXT WarGames Preview',
-    description: 'Our predictions and analysis for the upcoming NXT WarGames event, including potential surprises and match breakdowns.',
-    date: '2022-11-28',
-    duration: '47:35',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-6.jpg',
-    tags: ['wwe', 'nxt', 'wargames', 'preview']
-  },
-];
+const allEpisodes = await getCollection('episodes', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Sort episodes by date (newest first)
+allEpisodes.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -96,27 +34,27 @@ const formatDate = (dateString: string) => {
           <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
             <div class="relative pb-[56.25%] bg-gray-200">
               <img 
-                src={episode.image} 
-                alt={episode.title}
+                src={episode.data.image} 
+                alt={episode.data.title}
                 class="absolute inset-0 w-full h-full object-cover"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
               <div class="absolute bottom-0 left-0 p-4 w-full">
                 <span class="inline-block bg-red-700 text-white text-xs px-2 py-1 rounded">
-                  {episode.duration}
+                  {episode.data.duration}
                 </span>
               </div>
             </div>
             <div class="p-6">
-              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)}</div>
+              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.data.date)}</div>
               <h3 class="text-xl font-bold mb-2 font-serif">
-                <a href={`/episodes/${episode.id}`} class="hover:text-red-700 transition-colors">
-                  {episode.title}
+                <a href={`/episodes/${episode.slug}`} class="hover:text-red-700 transition-colors">
+                  {episode.data.title}
                 </a>
               </h3>
-              <p class="text-gray-600 mb-4">{episode.description}</p>
+              <p class="text-gray-600 mb-4">{episode.data.description}</p>
               <div class="flex flex-wrap gap-2 mb-4">
-                {episode.tags.map(tag => (
+                {episode.data.tags?.map((tag: string) => (
                   <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
                     {tag}
                   </span>
@@ -124,7 +62,7 @@ const formatDate = (dateString: string) => {
               </div>
               <div class="flex space-x-3">
                 <a 
-                  href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
+                  href={`https://www.youtube.com/watch?v=${episode.data.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-red-700 hover:text-red-800 flex items-center text-sm"
@@ -136,7 +74,7 @@ const formatDate = (dateString: string) => {
                   Watch
                 </a>
                 <a 
-                  href={episode.audiomackUrl}
+                  href={episode.data.audiomackUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-red-700 hover:text-red-800 flex items-center text-sm"

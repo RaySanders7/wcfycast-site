@@ -1,39 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Sample episode data - this will later be replaced with data from Decap CMS
-const featuredEpisodes = [
-  {
-    id: 1,
-    title: 'WrestleMania Recap & Analysis',
-    description: 'We break down all the biggest moments, surprises, and upsets from this year\'s WrestleMania!',
-    date: '2023-04-10',
-    duration: '1:25:36',
-    youtubeId: '5pL_TXiMQSQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-1.jpg'
-  },
-  {
-    id: 2,
-    title: 'AEW Revolution Review',
-    description: 'Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company.',
-    date: '2023-03-15',
-    duration: '1:12:45',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-2.jpg'
-  },
-  {
-    id: 3,
-    title: 'NXT 2.0: Love It or Hate It?',
-    description: 'We debate the NXT rebrand and whether the changes are helping or hurting the brand.',
-    date: '2023-03-01',
-    duration: '58:22',
-    youtubeId: 'dQw4w9WgXcQ',
-    audiomackUrl: '#',
-    image: '/placeholder-episode-3.jpg'
-  }
-];
+const allEpisodes = await getCollection('episodes', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Sort episodes by date (newest first) and take the first 3 as featured
+allEpisodes.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const featuredEpisodes = allEpisodes.slice(0, 3);
 
 const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -75,28 +50,28 @@ const formatDate = (dateString: string) => {
           <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105 mx-auto w-full max-w-sm sm:max-w-none">
             <div class="relative pb-[56.25%] bg-gray-200">
               <img 
-                src={episode.image} 
-                alt={episode.title}
+                src={episode.data.image} 
+                alt={episode.data.title}
                 class="absolute inset-0 w-full h-full object-cover"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
               <div class="absolute bottom-0 left-0 p-3 sm:p-4 w-full">
                 <span class="inline-block bg-red-700 text-white text-xs px-2 py-1 rounded">
-                  {episode.duration}
+                  {episode.data.duration}
                 </span>
               </div>
             </div>
             <div class="p-4 sm:p-6">
-              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.date)}</div>
+              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.data.date)}</div>
               <h3 class="text-lg sm:text-xl font-bold mb-2 font-serif leading-tight">
-                <a href={`/episodes/${episode.id}`} class="hover:text-red-700 transition-colors">
-                  {episode.title}
+                <a href={`/episodes/${episode.slug}`} class="hover:text-red-700 transition-colors">
+                  {episode.data.title}
                 </a>
               </h3>
-              <p class="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3">{episode.description}</p>
+              <p class="text-gray-600 mb-4 text-sm sm:text-base line-clamp-3">{episode.data.description}</p>
               <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <a 
-                  href={`https://www.youtube.com/watch?v=${episode.youtubeId}`}
+                  href={`https://www.youtube.com/watch?v=${episode.data.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-red-700 hover:text-red-800 flex items-center justify-center sm:justify-start py-2 sm:py-0"
@@ -108,7 +83,7 @@ const formatDate = (dateString: string) => {
                   Watch
                 </a>
                 <a 
-                  href={episode.audiomackUrl}
+                  href={episode.data.audiomackUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-red-700 hover:text-red-800 flex items-center justify-center sm:justify-start py-2 sm:py-0"
