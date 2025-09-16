@@ -1,10 +1,11 @@
+# Indentation is important in YAML
+# Make sure there are no spaces before dashes and colons
 backend:
   name: git-gateway
-  branch: main  # Branch to update (optional; defaults to master)
+  branch: main
 
-# This line should *not* be indented to prevent errors
-media_folder: "public/uploads" # Media files will be stored in the repo under public/uploads
-public_folder: "/uploads" # The public-facing path for media files
+media_folder: "public/uploads"
+public_folder: "/uploads"
 
 collections:
   - name: "episodes"
@@ -13,14 +14,14 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Long Description", name: "longDescription", widget: "markdown" }
-      - { label: "Duration", name: "duration", widget: "string" }
-      - { label: "YouTube Video ID", name: "youtubeId", widget: "string", required: false }
-      - { label: "Audiomack URL", name: "audiomackUrl", widget: "string", required: false }
-      - { label: "Cover Image", name: "image", widget: "image", required: false }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Host Notes", name: "hostNotes", widget: "list", required: false, field: { label: "Note", name: "note", widget: "string" }}
-      - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Long Description", name: "longDescription", widget: "markdown"}
+      - {label: "Duration", name: "duration", widget: "string"}
+      - {label: "YouTube Video ID", name: "youtubeId", widget: "string", required: false}
+      - {label: "Audiomack URL", name: "audiomackUrl", widget: "string", required: false}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Host Notes", name: "hostNotes", widget: "list", required: false, field: {label: "Note", name: "note", widget: "string"}}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, required: false}
