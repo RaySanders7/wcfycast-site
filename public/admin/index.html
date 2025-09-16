@@ -38,76 +38,8 @@
       <h1>We Comin' For You Cast - Content Manager</h1>
     </div>
     <div class="content">
-      <!-- Include the script that builds the CMS. -->
-      <script>
-        // Initialize the CMS object
-        CMS.init({
-          config: {
-            backend: {
-              name: 'git-gateway',
-              branch: 'main',
-            },
-            load_config_file: false,
-            media_folder: 'public/uploads',
-            public_folder: '/uploads',
-            collections: [
-              {
-                name: 'episodes',
-                label: 'Episodes',
-                folder: 'src/content/episodes',
-                create: true,
-                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-                fields: [
-                  { label: 'Title', name: 'title', widget: 'string' },
-                  { 
-                    label: 'Publish Date', 
-                    name: 'date', 
-                    widget: 'datetime',
-                    date_format: 'YYYY-MM-DD',
-                    time_format: false,
-                    format: 'YYYY-MM-DD',
-                  },
-                  { label: 'Description', name: 'description', widget: 'text' },
-                  { label: 'Long Description', name: 'longDescription', widget: 'markdown' },
-                  { label: 'Duration', name: 'duration', widget: 'string' },
-                  { label: 'YouTube Video ID', name: 'youtubeId', widget: 'string', required: false },
-                  { label: 'Audiomack URL', name: 'audiomackUrl', widget: 'string', required: false },
-                  { 
-                    label: 'Cover Image', 
-                    name: 'image', 
-                    widget: 'image', 
-                    required: false,
-                    media_library: {
-                      allow_multiple: false,
-                    },
-                  },
-                  {
-                    label: 'Tags',
-                    name: 'tags',
-                    widget: 'list',
-                    required: false,
-                    field: { label: 'Tag', name: 'tag', widget: 'string' },
-                  },
-                  {
-                    label: 'Host Notes',
-                    name: 'hostNotes',
-                    widget: 'list',
-                    required: false,
-                    field: { label: 'Note', name: 'note', widget: 'string' },
-                  },
-                  { 
-                    label: 'Draft', 
-                    name: 'draft', 
-                    widget: 'boolean', 
-                    default: false, 
-                    required: false 
-                  },
-                ],
-              },
-            ],
-          },
-        });
-      </script>
+      <!-- Decap CMS will automatically load and use the config.yml file -->
+      <div id="nc-root"></div>
     </div>
   </body>
 </html>
