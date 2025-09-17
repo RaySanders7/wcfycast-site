@@ -25,14 +25,14 @@ const { youtubeId, audiomackUrl, title } = Astro.props;
   )}
 
   {audiomackUrl && (
-    <div>
+    <div class="h-80">
       <h3 class="text-lg sm:text-xl font-bold font-serif mb-3 sm:mb-4">Listen on Audiomack</h3>
       <div class="bg-gray-200 rounded-lg overflow-hidden max-w-2xl mx-auto">
         <iframe 
           src={audiomackUrl.replace('audiomack.com/', 'audiomack.com/embed/')}
           title={`${title} on Audiomack`}
           scrolling="no"
-          class="w-full h-32 sm:h-40"
+          class="w-full h-80 sm:h-80"
         ></iframe>
       </div>
     </div>
