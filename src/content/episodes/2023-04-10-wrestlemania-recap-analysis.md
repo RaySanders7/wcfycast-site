@@ -1,6 +1,6 @@
 ---
 title: "WrestleMania Recap & Analysis"
-date: "2023-04-10"
+date: 2023-04-10
 description: "We break down all the biggest moments, surprises, and upsets from this year's WrestleMania!"
 longDescription: |
   In this action-packed episode, we dive deep into all the matches, moments, and surprises from WrestleMania. From the opening match to the main event, we leave no stone unturned in our analysis.

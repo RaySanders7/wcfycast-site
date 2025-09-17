@@ -4,7 +4,7 @@ const episodes = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string(),
+    date: z.date(),
     description: z.string(),
     longDescription: z.string().optional(),
     duration: z.string(),

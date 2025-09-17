@@ -1,6 +1,6 @@
 ---
 title: "AEW Revolution Review"
-date: "2023-03-15"
+date: 2023-03-15
 description: "Our thoughts on the latest AEW PPV, including the shocking main event finish and what it means for the future of the company."
 longDescription: |
   AEW Revolution delivered another solid pay-per-view with several standout matches and moments that will be talked about for weeks to come.

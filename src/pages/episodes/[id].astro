@@ -49,7 +49,7 @@ const formatDate = (dateString: string) => {
         </div>
         
         <div class="md:w-2/3">
-          <span class="bg-red-700 text-white px-3 py-1 rounded-full text-sm font-medium">{formatDate(episode.data.date)} • {episode.data.duration}</span>
+          <span class="bg-red-700 text-white px-3 py-1 rounded-full text-sm font-medium">{formatDate(episode.data.date.toDateString())} • {episode.data.duration}</span>
           <h1 class="text-4xl md:text-5xl font-bold font-serif text-gray-900 mb-4">{episode.data.title}</h1>
           
           <div class="flex flex-wrap gap-2 mb-6">

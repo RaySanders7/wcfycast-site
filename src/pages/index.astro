@@ -62,7 +62,7 @@ const formatDate = (dateString: string) => {
               </div>
             </div>
             <div class="p-4 sm:p-6">
-              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.data.date)}</div>
+              <div class="text-sm text-gray-500 mb-2">{formatDate(episode.data.date.toDateString())}</div>
               <h3 class="text-lg sm:text-xl font-bold mb-2 font-serif leading-tight">
                 <a href={`/episodes/${episode.slug}`} class="hover:text-red-700 transition-colors">
                   {episode.data.title}

@@ -1,6 +1,6 @@
 ---
 title: "NXT 2.0: Love It or Hate It?"
-date: "2023-03-01"
+date: 2023-03-01
 description: "We debate the NXT rebrand and whether the changes are helping or hurting the brand."
 longDescription: |
   The NXT rebrand has been one of the most controversial topics in wrestling. In this episode, we dive deep into what's working, what isn't, and where the brand might be headed.
